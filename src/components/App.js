@@ -1,6 +1,6 @@
 import { Component } from "react";
-import { FeedbackMark } from "./Feedback/FeedbackMark/FeedbackMark";
-import { FeedbackStatistics } from "./Feedback/FeedbackStatistics/FeedbackStatistics";
+import { FeedbackMark } from "./FeedbackMark/FeedbackMark";
+import { FeedbackStatistics } from "./FeedbackStatistics/FeedbackStatistics";
 
 export class App extends Component {
       state = {
@@ -16,12 +16,20 @@ export class App extends Component {
     const { good } = this.state
     return Math.round((good/ this.countTotalFeedback())*100)
   }
-  
-render() {
 
+
+  onLeaveFeedback = newState => {
+    this.setState(prevState => ({
+      [newState]: prevState[newState] + 1,
+    }));
+  };
+render() {
+    const options = Object.keys(this.state);
         return (
             <div>
-                <FeedbackMark/>
+            <FeedbackMark
+              options={options}
+              onLeaveFeedback={this.onLeaveFeedback } />
                 <FeedbackStatistics
                     good={this.state.good}
                     neutral={this.state.neutral}

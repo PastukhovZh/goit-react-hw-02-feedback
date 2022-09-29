@@ -1,6 +1,9 @@
 import { Component } from "react";
-import { FeedbackMark } from "./FeedbackMark/FeedbackMark";
-import { FeedbackStatistics } from "./FeedbackStatistics/FeedbackStatistics";
+import { Section } from "./Section/Section";
+import { FeedbackOptions } from "./FeedbackOptions/FeedbackOptions";
+import { Statistics } from "./Statistics/Statistics";
+import { Notification } from "./Notification/Notification";
+import { Wrap } from "./App.styled";
 
 export class App extends Component {
       state = {
@@ -23,22 +26,29 @@ export class App extends Component {
       [newState]: prevState[newState] + 1,
     }));
   };
+  
 render() {
     const options = Object.keys(this.state);
-        return (
-            <div>
-            <FeedbackMark
-              options={options}
-              onLeaveFeedback={this.onLeaveFeedback } />
-                <FeedbackStatistics
-                    good={this.state.good}
-                    neutral={this.state.neutral}
-                    bad={this.state.bad}
-                    total={this.countTotalFeedback()}
-                    positiveFeedback={this.countPositiveFeedbackPercentage()}
-                />
-            </div>
+  return (
+      <Wrap>
+        <Section title={`Please leave feedback`} >
+        <FeedbackOptions
+          options={options}
+          onLeaveFeedback={this.onLeaveFeedback} />
+          
+        </Section>
+      <Section title={`Statistics`}>
+        {this.countTotalFeedback() > 0
+          ? <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.countTotalFeedback()}
+            positiveFeedback={this.countPositiveFeedbackPercentage()}
+          />
+          : <Notification message={`There is no feedback!`}/>}
+      </Section>
+      </Wrap>
         )
-        
     }
 };

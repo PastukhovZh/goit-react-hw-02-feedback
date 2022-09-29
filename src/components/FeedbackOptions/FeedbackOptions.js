@@ -1,8 +1,9 @@
-import { Button } from "./FeedbackOptions.styled"
+import PropTypes from "prop-types"
+import { Button, Wrap } from "./FeedbackOptions.styled"
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
     return (
-        <div>
+        <Wrap>
             {options.map(option => {
                 return (
                 <Button
@@ -11,6 +12,15 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
                 </Button>
                 )
             })}
-        </div>
+        </Wrap>
             )
+} 
+
+
+Wrap.propTypes = {
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            option:PropTypes.number.isRequired,
+        }),
+    ),
 }

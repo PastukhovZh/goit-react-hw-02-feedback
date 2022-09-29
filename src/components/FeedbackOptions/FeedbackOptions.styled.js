@@ -9,3 +9,6 @@ font-size: medium;
 font-weight: 600;
 border-radius: 4px;
 `
+
+export const Wrap = styled.div`
+margin: 0;`

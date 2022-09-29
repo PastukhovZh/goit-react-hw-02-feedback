@@ -5,6 +5,7 @@ import { Statistics } from "./Statistics/Statistics";
 import { Notification } from "./Notification/Notification";
 import { Wrap } from "./App.styled";
 
+
 export class App extends Component {
       state = {
   good: 0,
